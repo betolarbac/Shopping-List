@@ -1,6 +1,7 @@
 import { ListProvider} from "./context/listContext";
 import { Header } from "./components/header";
 import { List } from "./components/list/list";
+import { Footer } from "./components/footer/footer";
 
 export function App() {
 
@@ -9,6 +10,7 @@ export function App() {
       <ListProvider>
         <Header />
         <List />
+       <Footer />
       </ListProvider>
     </>
   );

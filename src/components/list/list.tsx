@@ -10,6 +10,7 @@ export function List() {
     });
   };
 
+
   return (
     <>
       <div className="absolute px-6 w-full flex flex-col gap-2 pb-6 lg:max-w-3xl lg:mx-auto lg:my-0 lg:relative lg:p-0 lg:pr-6 lg:pt-10">
@@ -29,7 +30,7 @@ export function List() {
                   {lists.amount} unidades
                 </p>
                 <p className="flex text-[#AFABB6] text-xs">
-                  {formatCurrency(lists.price)}
+                  {formatCurrency(lists.price * lists.amount)}
                 </p>
               </div>
             </div>

@@ -174,6 +174,9 @@ export function Header() {
                               <SelectItem value="Bebida">
                               Bebida
                               </SelectItem>
+                              <SelectItem value="Geral">
+                                Geral
+                              </SelectItem>
                             </SelectGroup>
                           </SelectContent>
                         </Select>
