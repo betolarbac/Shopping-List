@@ -77,4 +77,15 @@
 
 body {
   font-family: 'Inter', sans-serif;
+  background-color: #0C0C0D;
+}
+
+input[type=number]::-webkit-inner-spin-button { 
+  -webkit-appearance: none;
+  
+}
+input[type=number] { 
+ -moz-appearance: textfield;
+ appearance: textfield;
+
 }

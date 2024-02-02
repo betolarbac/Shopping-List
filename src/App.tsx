@@ -1,9 +1,16 @@
+import { ListProvider} from "./context/listContext";
+import { Header } from "./components/header";
+import { List } from "./components/list/list";
+
 export function App() {
+
   return (
     <>
-      <h1>hello world</h1>
+      <ListProvider>
+        <Header />
+        <List />
+      </ListProvider>
     </>
   );
 }
-
 
