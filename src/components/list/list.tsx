@@ -1,8 +1,10 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useList } from "@/context/listContext";
+import localforage from 'localforage';
+import { Trash2 } from 'lucide-react';
 
 export function List() {
-  const { list } = useList(); // Agora você pode usar o useList aqui
+  const { list, setList } = useList(); // Agora você pode usar o useList aqui
   const formatCurrency = (value: number) => {
     return value.toLocaleString("pt-BR", {
       style: "currency",
@@ -10,6 +12,11 @@ export function List() {
     });
   };
 
+  const handleDelete = async (id: number) => {
+    const newList = list.filter(item => item.id !== id);
+    setList(newList);
+    await localforage.setItem('list', newList);
+  };
 
   return (
     <>
@@ -27,7 +34,7 @@ export function List() {
                   {lists.title}
                 </label>
                 <p className="flex text-[#AFABB6] text-xs">
-                  {lists.amount} unidades
+                {lists.amount === 1 ? "1 unidade" : `${lists.amount} unidades`}
                 </p>
                 <p className="flex text-[#AFABB6] text-xs">
                   {formatCurrency(lists.price * lists.amount)}
@@ -36,7 +43,7 @@ export function List() {
             </div>
 
             <div>
-              <img src="/icon1.svg" alt="" />
+              <button onClick={() => handleDelete(lists.id)}><Trash2 className="text-[#E07B67]"/></button>
             </div>
           </div>
         ))}
