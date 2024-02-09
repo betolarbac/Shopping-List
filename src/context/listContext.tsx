@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import localforage from 'localforage';
 
 interface List {
   id: number;
@@ -23,14 +24,17 @@ export function ListProvider({ children }: ListProviderProps) {
   const [list, setList] = useState<List[]>([]);
 
   useEffect(() => {
-    const storedListString = localStorage.getItem('list');
-    if (storedListString) {
-      setList(JSON.parse(storedListString));
-    }
+    localforage.getItem('list').then(storedList => {
+      if (storedList) {
+        setList(storedList as List[]);
+      }
+    });
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('list', JSON.stringify(list));
+    localforage.setItem('list', list);
+
+    console.log(list)
   }, [list]);
 
   const value = { list, setList };
