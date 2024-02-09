@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/drawer";
 
 import { Plus } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, } from "react";
 import { useList } from "@/context/listContext";
 
 interface List {
@@ -32,22 +32,12 @@ interface List {
 }
 
 export function Header() {
-  const { list, setList } = useList();
+  const { setList } = useList();
   const [inputTitle, setInputTitle] = useState('');
   const [inputPrice, setInputPrice] = useState('');
   const [inputAmount, setInputAmount] = useState('');
   const [inputCategory, setInputCategory] = useState('');
 
-  useEffect(() => {
-    const storedListString = localStorage.getItem('list');
-    if (storedListString) {
-      setList(JSON.parse(storedListString));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('list', JSON.stringify(list));
-  }, [list]);
 
   const addList = () => {
     if (inputTitle.trim() !== '' && inputPrice.trim() !== '' && inputAmount.trim() !== '' && inputCategory.trim() !== '') {
@@ -92,9 +82,9 @@ export function Header() {
           <div className="lg:hidden">
             <Drawer>
               <DrawerTrigger>
-                <Button className="bg-[#7450AC] hover:bg-[#523480] rounded-full p-2 w-10 h-10">
-                  <Plus className="w-6 h-6" />
-                </Button>
+                <div className="bg-[#7450AC] hover:bg-[#523480] rounded-full p-2 w-10 h-10">
+                  <Plus className="w-6 h-6 text-white" />
+                </div>
               </DrawerTrigger>
 
                 <DrawerContent className="bg-[#0C0C0D] border-none">
@@ -190,7 +180,7 @@ export function Header() {
                       Salvar
                     </Button>
                     <DrawerClose asChild>
-                      <Button variant="outline">Cancel</Button>
+                      <Button variant="outline">Cancelar</Button>
                     </DrawerClose>
                   </DrawerFooter>
                 </DrawerContent>
