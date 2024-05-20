@@ -28,7 +28,6 @@ interface List {
   title: string;
   price: number;
   amount: number;
-  category: string;
 }
 
 export function Header() {
@@ -36,24 +35,21 @@ export function Header() {
   const [inputTitle, setInputTitle] = useState('');
   const [inputPrice, setInputPrice] = useState('');
   const [inputAmount, setInputAmount] = useState('');
-  const [inputCategory, setInputCategory] = useState('');
 
 
   const addList = () => {
-    if (inputTitle.trim() !== '' && inputPrice.trim() !== '' && inputAmount.trim() !== '' && inputCategory.trim() !== '') {
+    if (inputTitle.trim() !== '' && inputPrice.trim() !== '' && inputAmount.trim() !== '') {
       const newList: List = {
         id: Date.now(),
         title: inputTitle,
         price: parseFloat(inputPrice),
-        amount: parseFloat(inputAmount),
-        category: inputCategory
+        amount: parseFloat(inputAmount)
       };
 
       setList(prevList => [...prevList, newList]);
       setInputTitle('');
       setInputPrice('');
       setInputAmount('');
-      setInputCategory('');
     } 
   };
 
@@ -143,34 +139,6 @@ export function Header() {
                         />
                       </div>
 
-                      <div className="grid w-[140px] max-w-sm items-center gap-1.5">
-                        <Label className="text-xs text-title-gray-200">
-                          Categoria
-                        </Label>
-
-                        <Select  onValueChange={setInputCategory}>
-                          <SelectTrigger className="w-[140px] bg-[#111112] border-[#252529] border-solid text-white">
-                            <SelectValue placeholder="Selecione" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectGroup>
-                              <SelectLabel>Categoria</SelectLabel>
-                              <SelectItem value="Padaria">Padaria</SelectItem>
-                              <SelectItem value="Legume">Legume</SelectItem>
-                              <SelectItem value="Carne">
-                              Carne
-                              </SelectItem>
-                              <SelectItem value="Fruta">Fruta</SelectItem>
-                              <SelectItem value="Bebida">
-                              Bebida
-                              </SelectItem>
-                              <SelectItem value="Geral">
-                                Geral
-                              </SelectItem>
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                      </div>
                     </div>
                   </div>
 
@@ -189,19 +157,22 @@ export function Header() {
         </div>
 
         <div className="max-w-3xl hidden lg:flex">
-          <form action="" className="flex gap-3 items-end">
+          <div className="flex gap-3 items-end">
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <Label className="text-xs text-title-gray-200" htmlFor="text">
                 Item
               </Label>
               <Input
-                type="text"
-                id="name"
-                className="bg-[#111112] border-[#252529] border-solid text-white w-80"
+                 type="text"
+                 id="name"
+                 placeholder="Nome"
+                 value={inputTitle}
+                 onChange={e => setInputTitle(e.target.value)}
+                className="bg-[#111112] border-[#252529] border-solid text-white w-96"
               />
             </div>
 
-            <div className="grid w-full max-w-sm items-center gap-1.5">
+            <div className="grid w-full max-w-lg items-center gap-1.5">
               <Label
                 className="text-xs text-title-gray-200"
                 htmlFor="quantidade"
@@ -210,47 +181,34 @@ export function Header() {
               </Label>
 
               <Input
-                type="number"
-                id="quantidade"
-                className="bg-[#111112] border-[#252529] border-solid text-white w-20"
+               type="number"
+               id="quantidade"
+               placeholder="0"
+               value={inputAmount}
+               onChange={e => setInputAmount(e.target.value)}
+                className="bg-[#111112] border-[#252529] border-solid text-white w-36"
               />
             </div>
 
-            <div className="grid w-full max-w-sm items-center gap-1.5">
+            <div className="grid w-full max-w-lg items-center gap-1.5">
               <Label className="text-xs text-title-gray-200" htmlFor="Valor">
                 Valor
               </Label>
 
               <Input
-                type="number"
-                id="valor"
-                className="bg-[#111112] border-[#252529] border-solid text-white w-20"
+              type="number"
+              id="valor"
+              placeholder="0,00"
+              value={inputPrice}
+              onChange={e => setInputPrice(e.target.value)}
+                className="bg-[#111112] border-[#252529] border-solid text-white w-36"
               />
             </div>
 
-            <div className="grid w-full max-w-sm items-center gap-1.5">
-              <Label className="text-xs text-title-gray-200">Categoria</Label>
-              <Select>
-                <SelectTrigger className="w-[180px] bg-[#111112] border-[#252529] border-solid text-white">
-                  <SelectValue placeholder="Selecione" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Categoria</SelectLabel>
-                    <SelectItem value="apple">Apple</SelectItem>
-                    <SelectItem value="banana">Banana</SelectItem>
-                    <SelectItem value="blueberry">Blueberry</SelectItem>
-                    <SelectItem value="grapes">Grapes</SelectItem>
-                    <SelectItem value="pineapple">Pineapple</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <Button className="bg-[#7450AC] hover:bg-[#523480] rounded-full p-2 w-10 h-10">
+            <Button onClick={addList} className="bg-[#7450AC] hover:bg-[#523480] rounded-full p-2 w-10 h-10">
               <Plus className="w-6 h-6" />
             </Button>
-          </form>
+          </div>
         </div>
       </div>
     </>

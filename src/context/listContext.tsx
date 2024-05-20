@@ -6,7 +6,6 @@ interface List {
   title: string;
   price:  number;
   amount: number;
-  category: string;
 }
 
 interface ListContextData {
